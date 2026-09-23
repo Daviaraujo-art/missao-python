@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MISSÃO // PYTHON</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #050706;
+            --panel: #090d0a;
+            --border: #303a34;
+            --text: #d8e0d9;
+            --muted: #7f8b82;
+            --green: #74c77a;
+            --green-dark: #315b36;
+            --red: #c75c5c;
+            --red-dark: #632f2f;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(
+                    circle at 50% 30%,
+                    #18221d 0%,
+                    #080b09 45%,
+                    #030403 100%
+                );
+
+            color: var(--text);
+            font-family: "Courier New", monospace;
+            overflow-x: hidden;
+        }
+
+    /* TELA INICIAL */
+
+    .tela-inicial {
+    position: fixed;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #18221d 0%,
+            #080b09 50%,
+            #020302 100%
+        );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+
+    transition:
+        opacity 0.8s ease,
+        visibility 0.8s ease;
+}
+
+.tela-inicial.oculta {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.acesso {
+    width: min(500px, 90%);
+    padding: 50px 40px;
+
+    border: 1px solid #3d4a41;
+
+    background: rgba(7, 10, 8, 0.95);
+
+    text-align: center;
+
+    box-shadow:
+        0 0 60px rgba(0, 0, 0, 0.8),
+        inset 0 0 30px rgba(80, 120, 90, 0.03);
+}
+
+.acesso-status {
+    color: #743737;
+
+    font-size: 11px;
+    letter-spacing: 4px;
+
+    margin-bottom: 30px;
+}
+
+.acesso h2 {
+    color: #e7eee9;
+
+    font-size: clamp(28px, 5vw, 42px);
+
+    letter-spacing: 6px;
+    line-height: 1.3;
+
+    margin-bottom: 25px;
+
+    text-shadow:
+        0 0 20px rgba(190, 220, 200, 0.15);
+}
+
+.acesso p {
+    color: #89968c;
+
+    font-size: 13px;
+    line-height: 1.8;
+
+    margin-bottom: 35px;
+}
+
+.btn-iniciar {
+    width: 100%;
+
+    padding: 16px;
+
+    background: #101611;
+
+    border: 1px solid #536057;
+
+    color: #c9d5cc;
+
+    font-family: "Courier New", monospace;
+
+    font-weight: bold;
+    letter-spacing: 3px;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.btn-iniciar:hover {
+    background: #172019;
+
+    border-color: var(--green);
+
+    color: #dff1e1;
+
+    box-shadow:
+        0 0 20px rgba(116, 199, 122, 0.12);
+
+    transform: translateY(-2px);
+}
+
+.aviso-acesso {
+    display: block;
+
+    margin-top: 25px;
+
+    color: #743737;
+
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+        /* Scanlines */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+
+            background:
+                linear-gradient(
+                    rgba(255,255,255,0.015) 50%,
+                    transparent 50%
+                );
+
+            background-size: 100% 4px;
+            z-index: 10;
+        }
+
+        /* Vignette */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+
+            background:
+                radial-gradient(
+                    circle,
+                    transparent 45%,
+                    rgba(0, 0, 0, 0.45) 100%
+                );
+
+            z-index: 9;
+        }
+
+        .container {
+            width: min(1000px, 90%);
+            margin: auto;
+            padding: 50px 0;
+        }
+
+        .top-secret {
+            text-align: center;
+            color: #8f9b92;
+            font-size: 12px;
+            letter-spacing: 5px;
+            margin-bottom: 30px;
+        }
+
+        /* HEADER */
+
+        .header {
+            border: 1px solid #3d4a41;
+            padding: 30px;
+
+            background: rgba(10, 14, 11, 0.85);
+
+            box-shadow:
+                0 0 30px rgba(0, 0, 0, 0.5),
+                inset 0 0 30px rgba(80, 120, 90, 0.02);
+
+            position: relative;
+            transition: 0.3s ease;
+        }
+
+        .header:hover {
+            border-color: #526259;
+
+            box-shadow:
+                0 0 35px rgba(0, 0, 0, 0.6),
+                0 0 15px rgba(100, 160, 110, 0.04);
+        }
+
+        .header::before {
+            content: "CLASSIFIED";
+
+            position: absolute;
+            right: 20px;
+            top: 20px;
+
+            color: #743737;
+            border: 1px solid #743737;
+
+            padding: 5px 10px;
+
+            font-size: 10px;
+            letter-spacing: 2px;
+
+            transform: rotate(4deg);
+        }
+
+        .mission {
+            color: #89968c;
+            font-size: 12px;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: clamp(36px, 7vw, 76px);
+            letter-spacing: 8px;
+            color: #e7eee9;
+
+            text-shadow:
+                0 0 15px rgba(190, 220, 200, 0.15);
+        }
+
+        .subtitle {
+            margin-top: 15px;
+            color: #91a097;
+            line-height: 1.7;
+            max-width: 700px;
+        }
+
+        /* STATUS */
+
+        .status {
+            margin-top: 25px;
+
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .status span {
+            border: 1px solid #39453d;
+            padding: 8px 12px;
+
+            font-size: 11px;
+            color: #9ba99f;
+
+            transition: 0.25s ease;
+        }
+
+        .status span:hover {
+            border-color: #66746a;
+            color: #d5ddd7;
+            transform: translateY(-2px);
+        }
+
+        /* ONLINE */
+
+        .status .active {
+            color: #9bd49f;
+            border-color: #476d4c;
+
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .status .active::first-letter {
+            color: var(--green);
+        }
+
+        .online-light {
+            width: 7px;
+            height: 7px;
+
+            background: var(--green);
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 5px var(--green),
+                0 0 10px var(--green);
+
+            animation: blink 1.4s infinite;
+        }
+
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 1;
+
+                box-shadow:
+                    0 0 5px var(--green),
+                    0 0 10px var(--green);
+            }
+
+            50% {
+                opacity: 0.25;
+
+                box-shadow:
+                    0 0 2px var(--green);
+            }
+        }
+
+        /* SECTIONS */
+
+        .section {
+            margin-top: 30px;
+
+            border: 1px solid var(--border);
+
+            background: rgba(8, 11, 9, 0.9);
+
+            transition: 0.3s ease;
+        }
+
+        .section:hover {
+            border-color: #47534b;
+        }
+
+        .section-title {
+            padding: 15px 20px;
+
+            border-bottom: 1px solid var(--border);
+
+            color: #aab5ad;
+            font-size: 12px;
+            letter-spacing: 3px;
+        }
+
+        .mission-text {
+            padding: 25px;
+            line-height: 1.8;
+        }
+
+        .warning {
+            margin-top: 20px;
+            padding: 15px;
+
+            border-left: 3px solid #8d3838;
+
+            background: rgba(100, 30, 30, 0.08);
+
+            color: #b89b9b;
+            font-size: 13px;
+        }
+
+        /* CODE */
+
+        .code {
+            padding: 25px;
+            overflow-x: auto;
+            background: #050705;
+        }
+
+        pre {
+            font-family: "Courier New", monospace;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #cbd6ce;
+        }
+
+        .keyword {
+            color: #c792c7;
+        }
+
+        .variable {
+            color: #82b8d8;
+        }
+
+        .number {
+            color: #d9a96e;
+        }
+
+        .string {
+            color: #9bc98e;
+        }
+
+        .comment {
+            color: #59655d;
+        }
+
+        /* OBJECTIVE */
+
+        .objective {
+            padding: 25px;
+        }
+
+        .objective ol {
+            margin-left: 25px;
+            line-height: 2;
+            color: #aab5ad;
+        }
+
+        .objective strong {
+            color: #e0e8e2;
+        }
+
+        /* TERMINAL DE RESPOSTA */
+
+        .answer-area {
+            padding: 25px;
+        }
+
+        .answer-label {
+            display: block;
+
+            margin-bottom: 10px;
+
+            color: #87948b;
+
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
+
+        .answer-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .answer-input {
+            flex: 1;
+
+            min-width: 0;
+
+            padding: 14px 16px;
+
+            background: #040604;
+
+            border: 1px solid #39453d;
+
+            color: #dce7de;
+
+            font-family: "Courier New", monospace;
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.25s ease;
+        }
+
+        .answer-input::placeholder {
+            color: #4f5952;
+            opacity: 1;
+        }
+
+        .answer-input:hover {
+            border-color: #56635a;
+        }
+
+        .answer-input:focus {
+            border-color: var(--green-dark);
+
+            box-shadow:
+                0 0 0 2px rgba(116, 199, 122, 0.06),
+                0 0 15px rgba(116, 199, 122, 0.05);
+        }
+
+        .answer-button {
+            padding: 0 25px;
+
+            border: 1px solid #536057;
+
+            background: #101611;
+
+            color: #c9d5cc;
+
+            font-family: "Courier New", monospace;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.25s ease;
+        }
+
+        .answer-button:hover {
+            background: #172019;
+
+            border-color: var(--green);
+
+            color: #dff1e1;
+
+            box-shadow:
+                0 0 15px rgba(116, 199, 122, 0.08);
+
+            transform: translateY(-2px);
+        }
+
+        .answer-button:active {
+            transform: translateY(0);
+        }
+
+        /* RESULTADO */
+
+        .result {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 18px;
+
+            font-size: 13px;
+            line-height: 1.6;
+
+            border: 1px solid;
+        }
+
+        .result.success {
+            display: block;
+
+            color: #9bd49f;
+
+            border-color: #3f7045;
+
+            background: rgba(55, 120, 65, 0.08);
+
+            box-shadow:
+                0 0 20px rgba(80, 170, 90, 0.04);
+        }
+
+        .result.error {
+            display: block;
+
+            color: #d18b8b;
+
+            border-color: #703f3f;
+
+            background: rgba(120, 50, 50, 0.08);
+        }
+
+        .result-title {
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            margin-top: 40px;
+
+            text-align: center;
+
+            color: #4f5952;
+
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        /* RESPONSIVO */
+
+        @media (max-width: 600px) {
+
+            .container {
+                padding: 25px 0;
+            }
+
+            .header {
+                padding: 22px;
+            }
+
+            h1 {
+                letter-spacing: 4px;
+            }
+
+            .header::before {
+                position: static;
+
+                display: inline-block;
+
+                margin-bottom: 20px;
+            }
+
+            pre {
+                font-size: 12px;
+            }
+
+            .answer-form {
+                flex-direction: column;
+            }
+
+            .answer-button {
+                padding: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="telaInicial" class="tela-inicial">
+
+    <div class="acesso">
+
+        <div class="acesso-status">
+            // ACESSO RESTRITO //
+        </div>
+
+        <h2>TRANSMISSÃO<br>INTERCEPTADA</h2>
+
+        <p>
+            Um código desconhecido foi detectado.
+            Sua missão é analisar a transmissão
+            e descobrir a mensagem oculta.
+        </p>
+
+        <button onclick="iniciarMissao()" class="btn-iniciar">
+            INICIAR MISSÃO
+        </button>
+
+        <span class="aviso-acesso">
+            ⚠ PROTOCOLO DE SEGURANÇA ATIVO
+        </span>
+
+    </div>
+
+</div>
+
+     <audio id="musicaFundo" loop>
+        <source src="./assets/suspense.mp3" type="audio/mpeg">
+    </audio>
+
+    <main class="container">
+
+        <div class="top-secret">
+            // OPERAÇÃO PYTHON //
+        </div>
+
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+            <div class="mission">
+                MISSÃO Nº 007 — PROTOCOLO DE DECODIFICAÇÃO
+            </div>
+
+            <h1>PYTHON</h1>
+
+            <p class="subtitle">
+                Um código foi interceptado. Sua missão é analisar a sequência
+                lógica, seguir cada condição e descobrir a mensagem escondida.
+            </p>
+
+            <div class="status">
+
+                <span class="active">
+                    <span class="online-light"></span>
+                    SISTEMA ONLINE
+                </span>
+
+                <span>
+                    NÍVEL: INICIANTE
+                </span>
+
+                <span>
+                    LINGUAGEM: PYTHON
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <!-- MISSÃO -->
+
+        <section class="section">
+
+            <div class="section-title">
+                // TRANSMISSÃO INTERCEPTADA
+            </div>
+
+            <div class="mission-text">
+
+                <p>
+                    O agente deixou uma função capaz de revelar a senha.
+                    Entretanto, o sistema possui várias condições.
+                </p>
+
+                <p style="margin-top: 15px;">
+                    Você precisa acompanhar a execução do código
+                    <strong>linha por linha</strong>.
+                </p>
+
+                <div class="warning">
+                    ⚠ ATENÇÃO: não tente adivinhar a senha.
+                    O objetivo da missão é descobrir por que o programa
+                    chega ao resultado.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CÓDIGO -->
+
+        <section class="section">
+
+            <div class="section-title">
+                // CÓDIGO INTERCEPTADO
+            </div>
+
+            <div class="code">
+
+<pre>
+<span class="variable">a</span> = <span class="number">7</span>
+<span class="variable">b</span> = <span class="number">3</span>
+<span class="variable">c</span> = <span class="number">12</span>
+
+<span class="keyword">if</span> <span class="variable">a</span> &gt; <span class="number">5</span>:
+    <span class="keyword">if</span> <span class="variable">b</span> &gt; <span class="number">5</span>:
+        <span class="keyword">print</span>(<span class="string">"P"</span>)
+
+    <span class="keyword">elif</span> <span class="variable">c</span> &gt; <span class="number">10</span>:
+        <span class="keyword">if</span> <span class="variable">a</span> + <span class="variable">b</span> &gt; <span class="variable">c</span>:
+            <span class="keyword">print</span>(<span class="string">"S"</span>)
+        <span class="keyword">else</span>:
+            <span class="keyword">print</span>(<span class="string">"T"</span>)
+
+    <span class="keyword">else</span>:
+        <span class="keyword">print</span>(<span class="string">"F"</span>)
+</pre>
+
+            </div>
+
+        </section>
+
+
+        <!-- OBJETIVO -->
+
+        <section class="section">
+
+            <div class="section-title">
+                // OBJETIVO DA MISSÃO
+            </div>
+
+            <div class="objective">
+
+                <ol>
+                    <li>Descubra se <strong>a &gt; 5</strong>.</li>
+                    <li>Depois analise <strong>b &gt; 5</strong>.</li>
+                    <li>Se necessário, verifique <strong>c &gt; 10</strong>.</li>
+                    <li>Calcule <strong>a + b</strong>.</li>
+                    <li>Compare o resultado com <strong>c</strong>.</li>
+                    <li>Descubra qual letra será impressa.</li>
+                </ol>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESPOSTA -->
+
+        <section class="section">
+
+            <div class="section-title">
+                // TERMINAL DE AUTENTICAÇÃO
+            </div>
+
+            <div class="answer-area">
+
+                <label
+                    class="answer-label"
+                    for="answer"
+                >
+                    DIGITE A LETRA REVELADA PELO CÓDIGO
+                </label>
+
+                <div class="answer-form">
+
+                    <input
+                        type="text"
+                        id="answer"
+                        class="answer-input"
+                        maxlength="1"
+                        placeholder="Ex.: S"
+                        autocomplete="off"
+                        onkeydown="if(event.key === 'Enter') verificarResposta()"
+                    >
+
+                    <button
+                        class="answer-button"
+                        onclick="verificarResposta()"
+                    >
+                        EXECUTAR
+                    </button>
+
+                </div>
+
+                <div id="result" class="result"></div>
+
+            </div>
+
+        </section>
+
+
+        <div class="footer">
+            TRANSMISSÃO ENCERRADA // NÃO COMPARTILHE ESTE ARQUIVO
+        </div>
+
+    </main>
+
+
+    <script>
+
+        function verificarResposta() {
+
+            const input = document.getElementById("answer");
+            const result = document.getElementById("result");
+
+            // Remove espaços e transforma a resposta em maiúscula
+            const resposta = input.value.trim().toUpperCase();
+
+            // Resposta correta da missão
+            const respostaCorreta = "T";
+
+            // Limpa estados anteriores
+            result.className = "result";
+
+            // Verifica se o usuário digitou algo
+            if (resposta === "") {
+
+                result.classList.add("error");
+
+                result.innerHTML = `
+                    <div class="result-title">
+                        ⚠ FALHA
+                    </div>
+
+                    Nenhuma resposta foi inserida.
+                    Digite a letra encontrada na análise.
+                `;
+
+                return;
+            }
+
+            // Verifica a resposta
+            if (resposta === respostaCorreta) {
+
+                result.classList.add("success");
+
+                result.innerHTML = `
+                    <div class="result-title">
+                        ✓ SUCESSO
+                    </div>
+
+                    Código decifrado corretamente.
+                    A saída da função é <strong>${respostaCorreta}</strong>.
+                    Missão concluída.
+                `;
+
+                input.style.borderColor = "#476d4c";
+
+            } else {
+
+                result.classList.add("error");
+
+                result.innerHTML = `
+                    <div class="result-title">
+                        ✕ FALHA
+                    </div>
+
+                    A resposta <strong>${resposta}</strong>
+                    não corresponde à saída do código.
+                    Revise as condições e tente novamente.
+                `;
+
+                input.style.borderColor = "#703f3f";
+            }
+        }
+
+
+        const musica = document.getElementById("musicaFundo");
+
+        musica.volume = 0.25;
+
+        function iniciarMissao() {
+
+    const telaInicial = document.getElementById("telaInicial");
+
+    // Inicia a música
+    musica.play();
+
+    // Faz a tela inicial desaparecer
+    telaInicial.classList.add("oculta");
+
+}
+
+    </script>
+
+</body>
+</html>
