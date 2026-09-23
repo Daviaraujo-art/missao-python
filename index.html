@@ -40,7 +40,7 @@
             overflow-x: hidden;
         }
 
-    /* TELA INICIAL */
+    
 
     .tela-inicial {
     position: fixed;
@@ -162,7 +162,7 @@
     letter-spacing: 2px;
 }
 
-        /* Scanlines */
+        
         body::before {
             content: "";
             position: fixed;
@@ -179,7 +179,7 @@
             z-index: 10;
         }
 
-        /* Vignette */
+        
         body::after {
             content: "";
             position: fixed;
@@ -210,7 +210,7 @@
             margin-bottom: 30px;
         }
 
-        /* HEADER */
+        
 
         .header {
             border: 1px solid #3d4a41;
@@ -275,7 +275,7 @@
             max-width: 700px;
         }
 
-        /* STATUS */
+        
 
         .status {
             margin-top: 25px;
@@ -301,7 +301,7 @@
             transform: translateY(-2px);
         }
 
-        /* ONLINE */
+        
 
         .status .active {
             color: #9bd49f;
@@ -348,7 +348,7 @@
             }
         }
 
-        /* SECTIONS */
+        
 
         .section {
             margin-top: 30px;
@@ -391,7 +391,7 @@
             font-size: 13px;
         }
 
-        /* CODE */
+        
 
         .code {
             padding: 25px;
@@ -426,7 +426,7 @@
             color: #59655d;
         }
 
-        /* OBJECTIVE */
+        
 
         .objective {
             padding: 25px;
@@ -442,7 +442,7 @@
             color: #e0e8e2;
         }
 
-        /* TERMINAL DE RESPOSTA */
+        
 
         .answer-area {
             padding: 25px;
@@ -536,7 +536,7 @@
             transform: translateY(0);
         }
 
-        /* RESULTADO */
+        
 
         .result {
             display: none;
@@ -580,7 +580,7 @@
             margin-bottom: 5px;
         }
 
-        /* FOOTER */
+        
 
         .footer {
             margin-top: 40px;
@@ -593,7 +593,7 @@
             letter-spacing: 2px;
         }
 
-        /* RESPONSIVO */
+        
 
         @media (max-width: 600px) {
 
@@ -673,7 +673,7 @@
         </div>
 
 
-        <!-- HEADER -->
+        
 
         <header class="header">
 
@@ -708,7 +708,7 @@
         </header>
 
 
-        <!-- MISSÃO -->
+        
 
         <section class="section">
 
@@ -729,7 +729,7 @@
                 </p>
 
                 <div class="warning">
-                    ⚠ ATENÇÃO: não tente adivinhar a senha.
+                    ⚠ ATENÇÃO: Não tente adivinhar a senha.
                     O objetivo da missão é descobrir por que o programa
                     chega ao resultado.
                 </div>
@@ -739,7 +739,7 @@
         </section>
 
 
-        <!-- CÓDIGO -->
+        
 
         <section class="section">
 
@@ -773,7 +773,7 @@
         </section>
 
 
-        <!-- OBJETIVO -->
+        
 
         <section class="section">
 
@@ -797,7 +797,7 @@
         </section>
 
 
-        <!-- RESPOSTA -->
+        
 
         <section class="section">
 
@@ -856,16 +856,16 @@
             const input = document.getElementById("answer");
             const result = document.getElementById("result");
 
-            // Remove espaços e transforma a resposta em maiúscula
+            
             const resposta = input.value.trim().toUpperCase();
 
-            // Resposta correta da missão
+            
             const respostaCorreta = "T";
 
-            // Limpa estados anteriores
+            
             result.className = "result";
 
-            // Verifica se o usuário digitou algo
+            
             if (resposta === "") {
 
                 result.classList.add("error");
@@ -882,7 +882,7 @@
                 return;
             }
 
-            // Verifica a resposta
+            
             if (resposta === respostaCorreta) {
 
                 result.classList.add("success");
@@ -926,10 +926,8 @@
 
     const telaInicial = document.getElementById("telaInicial");
 
-    // Inicia a música
     musica.play();
 
-    // Faz a tela inicial desaparecer
     telaInicial.classList.add("oculta");
 
 }
